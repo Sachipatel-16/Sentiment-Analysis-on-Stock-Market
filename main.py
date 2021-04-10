@@ -17,7 +17,7 @@ st.write("""
 #**SASTOM - Sentiment Analysis of Stock Market**
 """)
 
-image = Image.open("C:/Users/priya/Downloads/Projectimage.jpg")
+image = Image.open("C:/Users/priya/PycharmProjects/StockPrediction/PIC4.jpg")
 st.image(image, use_column_width = True)
 
 # Creating sidebar
@@ -26,34 +26,175 @@ st.sidebar.header('User Input')
 # Function to create user input
 def get_input():
     start_date = st.sidebar.text_input("Start Date", "2018-01-02")
-    end_date = st.sidebar.text_input("Start Date", "2018-03-16")
-    stock_symbol = st.sidebar.text_input("Stock Symbol", "AAPL")
-    return start_date, end_date, stock_symbol
+    end_date = st.sidebar.text_input("End Date", "2018-03-16")
+    #stock_symbol = st.sidebar.text_input("Stock Symbol", "AAPL")
+    option = st.sidebar.selectbox("Select any ticker from the list.", ('AAPl - Apple',
+                                                                       'AXP - American Express',
+                                                                       'BA - Boeing',
+                                                                       'CAT - Caterpillar Inc',
+                                                                       'CSCO - Cisco Systems Inc',
+                                                                       'CVX - Chevron Group',
+                                                                       'DIS - Walt Disney Company',
+                                                                       'DWDP - Dowdupont',
+                                                                       'GE - Genral Electric Company',
+                                                                       'GS - Goldman Sachs Group',
+                                                                       'HD - Home Depot',
+                                                                       'IBM - International Business Machines',
+                                                                       'INTC - Intel Corp',
+                                                                       'JNJ - Jhonson & Jhonson',
+                                                                       'JPM - JP Morgan Chase & Company',
+                                                                       'KO - Coca-cola Company',
+                                                                       'MCD - McDonald\'s Corp',
+                                                                       'MMM - 3M Company',
+                                                                       'MRK - Merk & Company',
+                                                                       'MSFT - Microsoft Corp',
+                                                                       'NKE- Nike Inc',
+                                                                       'PFE - Pfizer Inc',
+                                                                       'PG - Procter & Gamble Company',
+                                                                       'TRV - The Travelers Company',
+                                                                       'UNH - Unitedhealth Group Inc',
+                                                                       'UTX - United Technologies Corp',
+                                                                       'V - Visa Inc',
+                                                                       'VZ - Verizon Communication Inc',
+                                                                       'WMT - Wal-Mart Stores',
+                                                                       'XOM - Exxon Mobil Corp'))
+    option = option.split(" ", 1)
+    option = option[0]
+    return start_date, end_date, option #, stock_symbol
 
 # Function to get the company name
-def get_company_name(symbol):
-    if(symbol == 'AAPL'):
+def get_company_name(option):
+    if(option == 'AAPL'):
         return 'Apple'
-    elif(symbol == 'AXP'):
+    elif(option == 'AXP'):
         return 'American Express'
-    elif(symbol == 'BA'):
+    elif(option == 'BA'):
         return 'Boeing'
+    elif (option == 'CAT'):
+        return 'Caterpillar Inc'
+    elif (option == 'CSCO'):
+        return 'Cisco Systems Inc'
+    elif (option == 'CVX'):
+        return 'Chevron Group'
+    elif (option == 'DIS'):
+        return 'Walt Disney Company'
+    elif (option == 'DWDP'):
+        return 'Dowdupont'
+    elif (option == 'GE'):
+        return 'Genral Electric Company'
+    elif (option == 'GS'):
+        return 'Goldman Sachs Group'
+    elif (option == 'HD'):
+        return 'Home Depot'
+    elif (option == 'IBM'):
+        return 'International Business Machines'
+    elif (option == 'INTC'):
+        return 'Intel Corp'
+    elif (option == 'JNJ'):
+        return 'Jhonson & Jhonson'
+    elif (option == 'JPM'):
+        return 'JP Morgan Chase & Company'
+    elif (option == 'KO'):
+        return 'Coca-cola Company'
+    elif (option == 'MCD'):
+        return 'McDonald\'s Corp'
+    elif (option == 'MMM'):
+        return '3M Company'
+    elif (option == 'MRK'):
+        return 'Merk & Company'
+    elif (option == 'MSFT'):
+        return 'Microsoft Corp'
+    elif (option == 'NKE'):
+        return 'Nike Inc'
+    elif (option == 'PFE'):
+        return 'Pfizer Inc'
+    elif (option == 'PG'):
+        return 'Procter & Gamble Company'
+    elif (option == 'TRV'):
+        return 'The Travelers Company'
+    elif (option == 'UNH'):
+        return 'Unitedhealth Group Inc'
+    elif (option == 'UTX'):
+        return 'United Technologies Corp'
+    elif (option == 'V'):
+        return 'Visa Inc'
+    elif (option == 'VZ'):
+        return 'Verizon Communication Inc'
+    elif (option == 'WMT'):
+        return 'Wal-Mart Stores'
+    elif (option == 'XOM'):
+        return 'Exxon Mobil Corp'
+
     else:
         'None'
 
 # Function to get the dataset
 
-def get_data(symbol,start,end):
+def get_data(option,start,end):
 
     # Loading data
-    if symbol.upper() == 'AAPL':
-        df = pd.read_csv('C:/Users/priya/Downloads/Data/AAPL.csv')
-    elif symbol.upper() == 'AXP':
-        df = pd.read_csv('C:/Users/priya/Downloads/Data/AXP.csv')
-    elif symbol.upper() == 'BA':
-        df = pd.read_csv('C:/Users/priya/Downloads/Data/BA.csv')
+    if option.upper() == 'AAPL':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/AAPL.csv')
+    elif option.upper() == 'AXP':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/AXP.csv')
+    elif option.upper() == 'BA':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/BA.csv')
+    elif option.upper() == 'CAT':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/CAT.csv')
+    elif option.upper() == 'CSCO':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/CSCO.csv')
+    elif option.upper() == 'CVX':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/CVX.csv')
+    elif option.upper() == 'DIS':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/DIS.csv')
+    elif option.upper() == 'DWDP':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/DWDP.csv')
+    elif option.upper() == 'GE':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/GE.csv')
+    elif option.upper() == 'GS':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/GS.csv')
+    elif option.upper() == 'HD':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/HD.csv')
+    elif option.upper() == 'IBM':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/IBM.csv')
+    elif option.upper() == 'INTC':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/INTC.csv')
+    elif option.upper() == 'JNJ':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/JNJ.csv')
+    elif option.upper() == 'JPM':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/JPM.csv')
+    elif option.upper() == 'KO':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/KO.csv')
+    elif option.upper() == 'MCD':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/MCD.csv')
+    elif option.upper() == 'MMM':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/MMM.csv')
+    elif option.upper() == 'MRK':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/MRK.csv')
+    elif option.upper() == 'MSFT':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/MSFT.csv')
+    elif option.upper() == 'NKE':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/NKE.csv')
+    elif option.upper() == 'PFE':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/PFE.csv')
+    elif option.upper() == 'PG':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/PG.csv')
+    elif option.upper() == 'TRV':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/TRV.csv')
+    elif option.upper() == 'UNH':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/UNH.csv')
+    elif option.upper() == 'UTX':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/UTX.csv')
+    elif option.upper() == 'V':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/V.csv')
+    elif option.upper() == 'VZ':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/VZ.csv')
+    elif option.upper() == 'WMT':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/WMT.csv')
+    elif option.upper() == 'XOM':
+        df = pd.read_csv('C:/Users/priya/PycharmProjects/StockPrediction/Data/XOM.csv')
     else:
-        df = pd.DataFrame(columns= ['Date','Close','Open', 'Volume', 'Adj Close', 'High', 'Low'])
+        df = pd.DataFrame(columns=['Date', 'Close', 'Open', 'Volume', 'Adj Close', 'High', 'Low'])
 
     # Getting the date Range
     start = pd.to_datetime(start)
